@@ -18,7 +18,7 @@
   <body>
     <?php include 'navbar.php'; ?>
     <div class="container">
-        <form action="">
+        <form action="/login.php">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email address</label>
                 <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
