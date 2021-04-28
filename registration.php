@@ -7,27 +7,29 @@ function xoosonbish($field){
 }
 
 if(isset($_POST['email'])) {
-    foreach($_POST as $index => $data) {
-      if(xoosonbish($data) == false) {
-        die('xooson baina' . $index);
-      }
+  foreach($_POST as $index => $data) {
+    if(xoosonbish($data) == false) {
+      die('xooson baina' . $index);
     }
+  }
 
-    if($_POST['password'] != $_POST['password_confirmation']) {
-      header('Location: /register.php?error=confirmation');
-      exit();
-    }
+  if($_POST['password'] != $_POST['password_confirmation']) {
+    header('Location: /register.php?error=confirmation');
+    exit();
+  }
 
-    $email = $_POST['email'];
-    $username = $_POST['username'];
+  $email = $_POST['email'];
+  $name = $_POST['name'];
+  $username = $_POST['username'];
+  $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     
   $serverip = "localhost";
-  $username = "root";
-  $password = "";
+  $dbusername = "root";
+  $dbpassword = "";
   $dbname = "apprenticemn";
 
   // Create connection
-  $conn = new mysqli($serverip, $username, $password, $dbname);
+  $conn = new mysqli($serverip, $dbusername, $dbpassword, $dbname);
 
   // Check connection
   if ($conn->connect_error) {
@@ -49,12 +51,16 @@ if(isset($_POST['email'])) {
 
   $sql = "SELECT * FROM `users` WHERE `username` = '$username'";
   $result = $conn->query($sql);
+
   if ($result->num_rows > 0) {
     header("Location: /register.php?error=username");
     exit();
   }
 
-  $insertSql = "INSERT INTO `users` (`name`, `username`, `email`, `password`) VALUE ('')";
+  $insertSql = "INSERT INTO `users` 
+  (`name`, `username`, `email`, `password`) VALUE 
+  ('$name', '$username', '$email', '$password')
+  ";
 
   $result = $conn->query($insertSql);
 
