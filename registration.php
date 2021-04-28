@@ -62,6 +62,8 @@ if(isset($_POST['email'])) {
   ('$name', '$username', '$email', '$password')
   ";
 
+// die($insertSql);
+
   $result = $conn->query($insertSql);
 
   if($result === TRUE) {
