@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 
 // UPDATE `users` SET `password` = '$2y$10$nM9isrzR2aly26Z7AhtKKeJg/ezyIkgplwO2mUrMYRodWH/w0/vy.' WHERE id > 0
 // password: asdfasdf
@@ -29,7 +29,7 @@ if(isset($_POST['email']) && isset($_POST['password'])) {
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
         if(password_verify($_POST['password'], $row['password'])) {
-
+            $_SESSION['username'] = $row['username'];
             header("Location: /profile.php");
             exit();
         } else {

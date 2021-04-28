@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['username'])) {
+    header("Location: /");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +15,12 @@
     <title>Profile</title>
 </head>
 <body>
-    Profile.
+    <?php
+    // mysql -> select -> where -> username = $_SESSION['username'];
+    $row
+    ?>
+    <form>
+        <input name="name" value="<?php echo $row['name']; ?>"/>
+    </form>
 </body>
 </html>
